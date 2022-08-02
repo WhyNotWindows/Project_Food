@@ -6,6 +6,12 @@ const cleanCSS = require("gulp-clean-css");
 const postcss = require("gulp-postcss");
 const browsersync = require("browser-sync");
 
+const child = require('child_process');
+
+gulp.task('json-server', () => {
+  child.exec('json-server dist/db.json');
+});
+
 const dist = "./dist";
 
 gulp.task("copy-html", () => {
@@ -120,4 +126,4 @@ gulp.task("prod", () => {
         .pipe(gulp.dest(dist + '/css'));
 });
 
-gulp.task("default", gulp.parallel("watch", "build"));
+gulp.task("default", gulp.parallel("watch", "build", "json-server"));
